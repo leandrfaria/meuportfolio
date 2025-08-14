@@ -1,4 +1,5 @@
 import Presentation from "./components/Presentation";
+import About from "./components/About";
 
 export default function Home() {
   return (
@@ -6,10 +7,10 @@ export default function Home() {
       <Presentation
         name="Leandro Faria"
         role="Desenvolvedor Front-end (Next.js, React, TypeScript)"
-        resumeUrl="/curriculo.pdf"   // arquivo real no public
-        imageSrc="/cartoon.png"      // imagem real no public
+        resumeUrl="/curriculo.pdf"
+        imageSrc="/cartoon.png"
       />
-      {/* Aqui depois vão entrar as seções: Sobre, Projetos, Tecnologias, Contatos */}
+      <About />
     </main>
   );
 }
