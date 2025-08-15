@@ -4,18 +4,21 @@ export type Project = {
   title: string;
   summary: string;
   tags: string[];
-  cover?: string;     // ex: /covers/scoreit.png
+  cover?: string;     // ex.: "/projetos/scoreit.png"
   demoUrl?: string;
   repoUrl?: string;
 };
 
-type Props = {
-  p: Project;
-  size?: "md" | "sm"; // NEW
-};
+type Props = { p: Project; size?: "md" | "sm" };
 
 export default function ProjectCardCompact({ p, size = "md" }: Props) {
   const isSm = size === "sm";
+
+  // 🔧 normaliza caminho: garante "/" no início
+  const coverSrc =
+    typeof p.cover === "string" && p.cover.trim().length > 0
+      ? p.cover.startsWith("/") ? p.cover : `/${p.cover}`
+      : undefined;
 
   return (
     <article
@@ -24,22 +27,28 @@ export default function ProjectCardCompact({ p, size = "md" }: Props) {
         isSm ? "p-3" : "p-4",
       ].join(" ")}
     >
-      {p.cover && (
-        <div
-          className={[
-            "relative w-full overflow-hidden rounded-lg bg-white/5",
-            isSm ? "mb-2 aspect-[4/3] rounded-md" : "mb-3 aspect-[16/9]",
-          ].join(" ")}
-        >
+      {/* Capa (só renderiza <Image> se coverSrc existir) */}
+      <div
+        className={[
+          "relative w-full overflow-hidden rounded-lg bg-white/5",
+          isSm ? "mb-2 aspect-[4/3] rounded-md" : "mb-3 aspect-[16/9]",
+        ].join(" ")}
+      >
+        {coverSrc ? (
           <Image
-            src={p.cover}
+            src={coverSrc}
             alt={`Capa do projeto ${p.title}`}
             fill
             className="object-cover transition duration-300 group-hover:scale-[1.02]"
             sizes={isSm ? "(max-width: 768px) 100vw, 33vw" : "(max-width: 768px) 100vw, 50vw"}
+            priority={false}
           />
-        </div>
-      )}
+        ) : (
+          <div className="absolute inset-0 grid place-items-center text-[12px] text-white/60">
+            sem capa
+          </div>
+        )}
+      </div>
 
       <h3 className={isSm ? "text-[15px] font-semibold text-brand-white" : "text-base font-semibold text-brand-white"}>
         {p.title}
@@ -91,11 +100,6 @@ export default function ProjectCardCompact({ p, size = "md" }: Props) {
           </a>
         )}
       </div>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-px -z-10 rounded-xl shadow-[0_0_90px_10px_rgba(128,152,72,0.06)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-      />
     </article>
   );
 }

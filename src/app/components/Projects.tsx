@@ -1,3 +1,4 @@
+// src/app/components/Projects.tsx
 import ProjectsPrimary from "./ProjectsPrimary";
 import OtherProjectsCarousel from "./OtherProjectsCarousel";
 import type { Project } from "./ProjectCardCompact";
@@ -5,25 +6,28 @@ import type { Project } from "./ProjectCardCompact";
 const principais: Project[] = [
   {
     title: "ScoreIt",
-    summary: "Catálogo de filmes/séries/músicas com Next 15 + API própria (JWT), cards animados e avaliações.",
-    tags: ["Next.js", "TypeScript", "Tailwind", "JWT"],
+    summary:
+      "ScoreIt é uma plataforma web para avaliar filmes, séries e músicas, ver opiniões de amigos e descobrir novos conteúdos.",
+    tags: ["Next.js", "TypeScript", "Tailwind", "API"],
     cover: "/covers/scoreit.png",
     demoUrl: "#",
     repoUrl: "#",
   },
   {
-    title: "Carreira FC",
-    summary: "Dashboard de temporada (FIFA) com JSON local, calendários e estatísticas.",
-    tags: ["Next.js", "UI/UX", "Tailwind"],
-    cover: "/covers/carreirafc.png",
+    title: "Nutrivo",
+    summary:
+      "Nutrivo é uma plataforma de nutrição com interface moderna que cria planos alimentares personalizados conforme os hábitos, objetivos e restrições do usuário.",
+    tags: ["Next.js 15", "Tailwind v4", "Inteligência Artificial"],
+    cover: "/projetos/nutrivo.png", // ✅ arquivo em public/projetos/nutrivo.png
     demoUrl: "#",
     repoUrl: "#",
   },
   {
-    title: "Portfolio v2025",
-    summary: "Este site: Next 15 + Tailwind v4, tipografia custom, microinterações e A11y.",
-    tags: ["Next.js 15", "Tailwind v4", "Acessibilidade"],
-    cover: "/covers/portfolio.png",
+    title: "Carreira FC",
+    summary:
+      "Página de time de futebol para modo carreira do FIFA, exibindo partidas, calendário e estatísticas de forma prática e organizada.",
+    tags: ["Next.js", "UI/UX", "Tailwind"],
+    cover: "/covers/carreirafc.png",
     demoUrl: "#",
     repoUrl: "#",
   },
@@ -70,6 +74,7 @@ const outros: Project[] = [
     title: "Forms & Validations",
     summary: "Padrões de formulários com validação.",
     tags: ["React", "Zod", "RHF"],
+    // cover opcional
   },
 ];
 
