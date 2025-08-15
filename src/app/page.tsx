@@ -1,5 +1,6 @@
 import Presentation from "./components/Presentation";
 import About from "./components/About";
+import Projects from "./components/Projects";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         imageSrc="/cartoon.png"
       />
       <About />
+      <Projects />
     </main>
   );
 }
