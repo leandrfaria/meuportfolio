@@ -1,5 +1,6 @@
 import Image from "next/image";
-import type { Project } from "./ProjectCardCompact";
+import { Project } from "./ProjectCardCompact";
+
 
 export default function ProjectCardMini({ p }: { p: Project }) {
   return (

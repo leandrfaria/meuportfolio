@@ -1,9 +1,9 @@
 "use client";
 
+import { bebasNeue } from "@/app/font";
 import { useEffect, useMemo, useState } from "react";
-import { bebasNeue } from "../font";
-import type { Project } from "./ProjectCardCompact";
-import ProjectCardMini from "./ProjectCardMini";
+import ProjectCardMini from "../ui/ProjectCardMini";
+import { Project } from "../ui/ProjectCardCompact";
 
 type Props = { title?: string; items: Project[] };
 
@@ -14,11 +14,9 @@ function chunk<T>(arr: T[], size: number) {
 }
 
 export default function OtherProjectsCarousel({ title = "outros projetos", items }: Props) {
-  // mobile: 2 cards
   const [perView, setPerView] = useState(2);
   const [slide, setSlide] = useState(0);
 
-  // 🔧 efeito com DEPENDÊNCIAS FIXAS: []
   useEffect(() => {
     const update = () => {
       if (window.innerWidth >= 1024) setPerView(4);
@@ -28,19 +26,20 @@ export default function OtherProjectsCarousel({ title = "outros projetos", items
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
-  }, []); // ← tamanho do array é sempre 0
+  }, []);
 
   const slides = useMemo(() => chunk(items, perView), [items, perView]);
   const max = Math.max(0, slides.length - 1);
 
-  // 🔧 efeito com DEPENDÊNCIAS FIXAS: [max]
   useEffect(() => {
     setSlide((s) => Math.min(s, max));
-  }, [max]); // ← tamanho do array é sempre 1
+  }, [max]);
 
   return (
-    <section className="mx-auto max-w-5xl px-4 sm:px-5 pb-12 md:pb-14 lg:pb-16">
-      <div className="mb-4 flex items-center justify-between">
+    // antes: py-20 md:py-24 lg:py-28
+    // agora: sem padding-top para colar melhor na seção anterior
+    <section className="mx-auto max-w-5xl px-5 pt-0 pb-20 md:pb-24 lg:pb-28">
+      <div className="mb-8 flex items-center justify-between">
         <h2 className={`${bebasNeue.className} text-3xl sm:text-4xl tracking-wide text-brand-white`}>
           <span className="inline-block border-b-4 border-brand-green pb-1">{title}</span>
         </h2>
@@ -72,7 +71,6 @@ export default function OtherProjectsCarousel({ title = "outros projetos", items
         >
           {slides.map((group, i) => (
             <div key={i} className="w-full flex-shrink-0 px-1">
-              {/* 2 no mobile, 3 md, 4 lg; gap reduzido no mobile */}
               <div className="flex items-stretch justify-start gap-3 sm:gap-4">
                 {group.map((p) => (
                   <ProjectCardMini key={p.title} p={p} />

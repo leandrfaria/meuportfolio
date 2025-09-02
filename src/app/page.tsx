@@ -1,6 +1,7 @@
-import Presentation from "./components/Presentation";
-import About from "./components/About";
-import Projects from "./components/Projects";
+import About from "./components/sections/About";
+import Presentation from "./components/sections/Presentation";
+
+import Projects from "./components/sections/Projects";
 
 export default function Home() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
-import { oswald, bebasNeue } from "../font"; // já que você adicionou as fontes
-import Typewriter from "./Typewriter";
+import { bebasNeue, oswald } from "@/app/font";
+import Typewriter from "../ui/Typewriter";
 
 type Props = {
   id?: string;
@@ -14,27 +14,23 @@ export default function About({ id = "sobre" }: Props) {
   return (
     <section
       id={id}
-      className="mx-auto max-w-5xl px-5 py-14 md:py-16 lg:py-20"
+      className="mx-auto max-w-5xl px-5 py-20 md:py-24 lg:py-28"
     >
-      {/* título da seção */}
       <h2
-        className={`${bebasNeue.className} text-3xl sm:text-4xl tracking-wide text-brand-white`}
+        className={`${bebasNeue.className} text-3xl sm:text-4xl tracking-wide text-brand-white mb-10`}
       >
         <span className="inline-block border-b-4 border-brand-green pb-1">
           sobre mim
         </span>
       </h2>
 
-      {/* grid principal */}
-      <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-[1.2fr_0.8fr]">
-        {/* bloco de texto com efeito de digitação */}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-[1.2fr_0.8fr]">
         <div className="rounded-xl border border-white/10 bg-white/5 p-5 md:p-6">
           <p className={`${oswald.className} text-base sm:text-lg text-white/90 leading-relaxed`}>
             <Typewriter text={aboutText} speed={18} startDelay={150} />
           </p>
         </div>
 
-        {/* mini-métricas/infos */}
         <div className="grid grid-cols-2 gap-4">
           <div className="rounded-lg border border-white/10 bg-white/[0.06] p-4">
             <p className="text-xs uppercase tracking-wider text-white/60">função</p>

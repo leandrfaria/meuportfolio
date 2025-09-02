@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { anton, oswald, bebasNeue } from "../font";
+import { anton } from "../../font";
 
 type Props = {
   name: string;
@@ -17,10 +17,10 @@ export default function Presentation({
   return (
     <section
       id="apresentacao"
-      className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-5 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-16 lg:py-20"
+      className="mx-auto max-w-5xl px-5 py-20 md:py-24 lg:py-28 grid grid-cols-1 items-center gap-8 md:grid-cols-[1.1fr_0.9fr]"
     >
-      {/* Texto primeiro no mobile */}
-      <div className="order-1 md:order-1">
+      {/* Texto */}
+      <div>
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-white/70">
           <span className="inline-block h-2 w-2 rounded-full bg-brand-green" />
           disponível para projetos
@@ -57,8 +57,8 @@ export default function Presentation({
         </div>
       </div>
 
-      {/* Imagem vem depois no mobile */}
-      <div className="order-2 md:order-2 relative flex items-center justify-center">
+      {/* Imagem */}
+      <div className="relative flex items-center justify-center">
         <div
           aria-hidden
           className="absolute -z-10 hidden h-3/4 w-3/4 rounded-full bg-brand-green/12 blur-3xl md:block"
