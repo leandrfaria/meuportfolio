@@ -14,7 +14,6 @@ type Props = { p: Project; size?: "md" | "sm" };
 export default function ProjectCardCompact({ p, size = "md" }: Props) {
   const isSm = size === "sm";
 
-  // 🔧 normaliza caminho: garante "/" no início
   const coverSrc =
     typeof p.cover === "string" && p.cover.trim().length > 0
       ? p.cover.startsWith("/") ? p.cover : `/${p.cover}`
