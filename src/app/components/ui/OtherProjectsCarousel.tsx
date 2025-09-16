@@ -3,11 +3,10 @@
 import { bebasNeue } from "@/app/font";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ProjectCardMini from "../ui/ProjectCardMini";
-import { Project } from "../ui/ProjectCardCompact";
+import type { Project } from "../ui/ProjectCardCompact";
 
 type Props = { title?: string; items: Project[] };
 
-/* --- Dropdown compacto --- */
 function useClickOutside<T extends HTMLElement>(onOutside: () => void) {
   const ref = useRef<T>(null);
   useEffect(() => {
@@ -29,10 +28,7 @@ function useClickOutside<T extends HTMLElement>(onOutside: () => void) {
 const CATEGORIES = ["Todas", "Frontend", "Java", "Python", "Kotlin"] as const;
 type Category = (typeof CATEGORIES)[number];
 
-function FilterDropdown({
-  value,
-  onChange,
-}: { value: Category; onChange: (v: Category) => void }) {
+function FilterDropdown({ value, onChange }: { value: Category; onChange: (v: Category) => void }) {
   const [open, setOpen] = useState(false);
   const wrapperRef = useClickOutside<HTMLDivElement>(() => setOpen(false));
   return (
@@ -78,13 +74,11 @@ function FilterDropdown({
   );
 }
 
-/* --- Componente principal (carrossel contínuo com step 2) --- */
 export default function OtherProjectsCarousel({ title = "outros projetos", items }: Props) {
-  // responsivo: quantos cabem, largura do card, gap e step em cards
   const [perView, setPerView] = useState(2);
   const [cardW, setCardW] = useState(170);
   const [gapPx, setGapPx] = useState(12);
-  const [stepCards, setStepCards] = useState(1); // mobile = 1, md+ = 2
+  const [stepCards, setStepCards] = useState(1);
 
   useEffect(() => {
     const update = () => {
@@ -99,14 +93,9 @@ export default function OtherProjectsCarousel({ title = "outros projetos", items
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // filtro
   const [cat, setCat] = useState<Category>("Todas");
   const FRONTEND_TAGS = useMemo(
-    () =>
-      new Set(
-        ["next.js", "next.js 15", "react", "typescript", "javascript", "tailwind", "tailwind v4", "ui/ux", "api", "inteligência artificial"]
-          .map((s) => s.toLowerCase())
-      ),
+    () => new Set(["next.js", "next.js 15", "react", "typescript", "javascript", "tailwind", "tailwind v4", "ui/ux", "api", "inteligência artificial"].map((s) => s.toLowerCase())),
     []
   );
   const isFrontend = (p: Project) => p.tags.some((t) => FRONTEND_TAGS.has(t.toLowerCase()));
@@ -121,7 +110,6 @@ export default function OtherProjectsCarousel({ title = "outros projetos", items
     }
   }, [cat, items]);
 
-  // índice do 1º card visível; move N cards por clique (N = stepCards)
   const [i, setI] = useState(0);
   const stepPx = (cardW + gapPx);
   const maxI = Math.max(0, filtered.length - perView);
@@ -139,7 +127,6 @@ export default function OtherProjectsCarousel({ title = "outros projetos", items
         </h2>
       </div>
 
-      {/* filtro + setas */}
       <div className="mb-4 flex items-center justify-between gap-3">
         <FilterDropdown value={cat} onChange={setCat} />
         <div className="flex items-center gap-2">
@@ -162,7 +149,6 @@ export default function OtherProjectsCarousel({ title = "outros projetos", items
         </div>
       </div>
 
-      {/* trilho contínuo */}
       {filtered.length === 0 ? (
         <div className="rounded-lg border border-white/10 bg-white/[0.04] p-6 text-sm text-white/70">
           Nenhum projeto nesta categoria.

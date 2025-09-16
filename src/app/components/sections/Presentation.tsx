@@ -37,20 +37,11 @@ export default function Presentation({
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-4">
-          <a
-            href={resumeUrl}
-            target={resumeUrl?.startsWith("http") ? "_blank" : undefined}
-            rel={resumeUrl?.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="inline-flex items-center justify-center rounded-md bg-brand-green px-5 py-2.5 text-sm font-semibold text-brand-black transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(128,152,72,0.25)]"
-            aria-label="Abrir meu currículo"
-            download={resumeUrl?.endsWith(".pdf") ? "" : undefined}
-          >
-            Meu Currículo
-          </a>
+
 
           <a
             href="#projetos"
-            className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/[0.02] px-5 py-2.5 text-sm font-semibold text-brand-white transition hover:border-brand-green/70 hover:text-brand-green"
+            className="inline-flex items-center justify-center rounded-md bg-brand-green px-5 py-2.5 text-sm font-semibold text-brand-black transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(128,152,72,0.25)]"
           >
             Ver Projetos
           </a>

@@ -1,26 +1,38 @@
 import Image from "next/image";
-import { Project } from "./ProjectCardCompact";
-
+import type { Project } from "./ProjectCardCompact";
 
 export default function ProjectCardMini({ p }: { p: Project }) {
   return (
     <article
       className="
         group relative flex flex-col overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] p-3
-        transition hover:shadow-[0_10px_30px_rgba(128,152,72,0.12)]
-        w-[170px] h-[250px]          /* ↑ maior no mobile pra não ficar minúsculo */
+        transition-all duration-300 hover:-translate-y-[2px] hover:border-brand-green/40 hover:shadow-[0_10px_30px_rgba(128,152,72,0.14)]
+        w-[170px] h-[250px]
         sm:w-[180px] sm:h-[260px]
         md:w-[200px] md:h-[280px]
         lg:w-[220px] lg:h-[300px]
       "
     >
+      {/* feixe leve */}
+      <span
+        aria-hidden
+        className="
+          pointer-events-none absolute top-[-25%] bottom-[-25%] left-[-45%] w-[35%]
+          -skew-x-12 rounded-[10px]
+          opacity-0 translate-x-[-120%]
+          transition duration-[600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)]
+          group-hover:opacity-100 group-hover:translate-x-[220%]
+          bg-[linear-gradient(90deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_45%,rgba(0,255,140,0.10)_50%,rgba(255,255,255,0.08)_55%,rgba(255,255,255,0)_100%)]
+        "
+      />
+
       <div className="relative mb-2 aspect-[4/3] w-full overflow-hidden rounded-md bg-white/5">
         {p.cover && (
           <Image
             src={p.cover}
             alt={`Capa do projeto ${p.title}`}
             fill
-            className="object-cover transition duration-300 group-hover:scale-[1.02]"
+            className="object-cover transition duration-300 group-hover:scale-[1.03]"
             sizes="(max-width: 640px) 170px, (max-width: 768px) 180px, (max-width: 1024px) 200px, 220px"
           />
         )}
